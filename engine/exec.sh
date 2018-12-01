@@ -1,7 +1,7 @@
 #!/bin/bash
-AS=arm-none-eabi-as
-CC=arm-none-eabi-gcc
-ROOT=/home/nmertin/lhd2018/engine
+AS=as
+CC=gcc
+ROOT=/root/lhd2018/engine
 
 ID=$RANDOM
 
@@ -11,7 +11,6 @@ cat > code.s
 if ! $AS code.s -o code.o; then
 	exit 1
 fi
-echo $*
 (
 echo ".text"
 echo ".globl setup"
@@ -48,3 +47,6 @@ fi
 if ! $CC code.o setup.o $ROOT/main.o $ROOT/invoke.o -o exe; then
 	exit 1
 fi
+echo
+./exe
+exit $?
