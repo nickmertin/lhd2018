@@ -12,23 +12,32 @@ if ! $AS code.s -o code.o; then
 	exit 1
 fi
 if ! (
+STR_COUNT=0
+STR_EXTRA=
 echo ".text"
 echo ".globl setup"
 echo "setup:"
-for arg in $@; do
+for arg; do
 if [ "$arg" = "" ]; then
 	break
 fi
 IFS=':' read -r type value <<< "$arg"
 case "$type" in
 	"int")
-	case $value in
+	case "$value" in
 		''|*-?[!0-9]*)
 		echo "Error: argument is not in integer format!" >&2
 		exit 1
 		;;
 	esac
 	echo "ldr r0, =$value"
+	;;
+	"str")
+	echo "ldr r0, =_str_$STR_COUNT"
+	STR_LINE="_str_$STR_COUNT: .asciz "
+	STR_LINE=$STR_LINE$'\"'$(printf %q "$value")$'\"'$'\n'
+	STR_EXTRA=$STR_EXTRA$STR_LINE
+	STR_COUNT=$(($STR_COUNT+1))
 	;;
 	"print_si")
 	echo "ldr r0, [r1]"
@@ -50,6 +59,7 @@ esac
 echo "push {r0}"
 done
 echo "bx lr"
+echo "$STR_EXTRA"
 ) > setup.s; then
 	exit 1
 fi

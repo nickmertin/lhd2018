@@ -6,10 +6,11 @@ const app = express()
 
 const types = [
 	{ id: 'int', name: 'Integer' },
-	{ id: 'none', name: 'None' },
+	{ id: 'str', name: 'String' },
 	{ id: 'print_si', name: 'Print function (signed)' },
 	{ id: 'print_ui', name: 'Print function (unsigned)' },
-	{ id: 'print_c', name: 'Print function (character)' }
+	{ id: 'print_c', name: 'Print function (character)' },
+	{ id: 'none', name: 'None' }
 ]
 
 const registers = ['r0', 'r1', 'r2', 'r3'].map(name => ({ name, types }))
@@ -32,7 +33,9 @@ app.get('/form', (req, res) => {
 app.post('/form', (req, res) => {
 	console.log('POST request received')
 	console.log(req.body)
-	const proc = spawn('../engine/exec.sh', registers.map((_, i) => `${req.body[`type${i}`]}:${req.body[`value${i}`]}`).reverse())
+	const args = registers.map((_, i) => `${req.body[`type${i}`]}:${req.body[`value${i}`]}`/*.replace(/ /g, '\\ ')*/).reverse()
+	console.log(args)
+	const proc = spawn('../engine/exec.sh', args)
 	console.log('process spawned')
 	let out = ''
 	proc.stdout.on('data', data => out += data.toString())
