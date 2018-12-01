@@ -39,6 +39,7 @@ app.post('/form', (req, res) => {
 	proc.stdin.write(req.body.code)
 	proc.stdin.end()
 	proc.on('close', result => {
+		console.log(result)
 		res.render('form', {
 			registers: registers.map((r, i) => Object.assign({
 				value: req.body[`value${i}`]
@@ -55,4 +56,5 @@ app.post('/form', (req, res) => {
 	console.log('end')
 })
 
-app.listen(8080)
+app.listen(8085)
+console.log('Server started')
