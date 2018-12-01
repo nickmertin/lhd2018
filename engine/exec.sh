@@ -36,6 +36,9 @@ case "$type" in
 	"print_ui")
 	echo "ldr r0, [r1, #4]"
 	;;
+	"print_c")
+	echo "ldr r0, [r1, #8]"
+	;;
 	"none")
 	echo "mov r0, #0"
 	;;
