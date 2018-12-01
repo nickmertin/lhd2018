@@ -1,0 +1,16 @@
+{
+  "name": "lhd2018-web-interface",
+  "version": "1.0.0",
+  "description": "Web interface for ARM assembly testing system",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Nick Mertin <nickmertin@gmail.com>",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "express": "^4.16.4",
+    "express-handlebars": "^3.0.0",
+    "handlebars": "^4.0.12"
+  }
+}

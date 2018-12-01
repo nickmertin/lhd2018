@@ -1,0 +1,26 @@
+<form method="POST" action="">
+<table>
+<tr>
+	<th>Index</th>
+	<th>Register</th>
+	<th>Type</th>
+	<th>Value</th>
+</tr>
+{{#each registers}}
+<tr>
+	<td>{{@index}}</td>
+	<td><code>{{name}}</code></td>
+	<td>
+	<select name="type{{@index}}">
+		{{#each types}}
+		<option value="{{id}}" {{#if selected}}selected{{/if}}>{{name}}</option>
+		{{/each}}
+	</select>
+	</td>
+	<td><input type="text" name="value{{@index}}" {{#if value}}value="{{value}}"{{/if}}/></td>
+</tr>
+{{/each}}
+</table>
+<textarea name="code" rows="20" cols="30">{{code}}</textarea>
+<button>Run</button>
+</form>
