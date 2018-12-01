@@ -11,7 +11,7 @@ cat > code.s
 if ! $AS code.s -o code.o; then
 	exit 1
 fi
-(
+if ! (
 echo ".text"
 echo ".globl setup"
 echo "setup:"
@@ -40,7 +40,9 @@ esac
 echo "push {r0}"
 done
 echo "bx lr"
-) > setup.s
+) > setup.s; then
+	exit 1
+fi
 if ! $AS setup.s -o setup.o; then
 	exit 1
 fi
