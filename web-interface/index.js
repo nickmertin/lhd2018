@@ -4,14 +4,11 @@ const { spawn } = require('child_process')
 
 const app = express()
 
-const registers = [
-	{
-		name: 'r0',
-		types: [
-			{ id: 'int', name: 'Integer' }
-		]
-	}
+const types = [
+	{ id: 'int', name: 'Integer' }
 ]
+
+const registers = ['r0', 'r1', 'r2', 'r3'].map(name => ({ name, types }))
 
 app.use(express.urlencoded())
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
@@ -31,7 +28,7 @@ app.get('/form', (req, res) => {
 app.post('/form', (req, res) => {
 	console.log('POST request received')
 	console.log(req.body)
-	const proc = spawn('../engine/exec.sh', registers.map((_, i) => `${req.body[`type${i}`]}:${req.body[`value${i}`]}`))
+	const proc = spawn('../engine/exec.sh', registers.map((_, i) => `${req.body[`type${i}`]}:${req.body[`value${i}`]}`).reverse())
 	console.log('process spawned')
 	let out = ''
 	proc.stdout.on('data', data => out += data.toString())

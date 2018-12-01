@@ -5,6 +5,6 @@
 _invoke:
 	push {fp, lr}
 	bl	setup
-	pop	{r0}
+	pop	{r0-r3}
 	bl	test
 	pop {fp, pc}
