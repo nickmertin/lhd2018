@@ -30,6 +30,15 @@ case "$type" in
 	esac
 	echo "ldr r0, =$value"
 	;;
+	"print_si")
+	echo "ldr r0, [r1]"
+	;;
+	"print_ui")
+	echo "ldr r0, [r1, #4]"
+	;;
+	"none")
+	echo "mov r0, #0"
+	;;
 	*)
 	echo "Error: invalid arg type $type!" >&2
 	exit 1

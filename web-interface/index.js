@@ -5,7 +5,10 @@ const { spawn } = require('child_process')
 const app = express()
 
 const types = [
-	{ id: 'int', name: 'Integer' }
+	{ id: 'int', name: 'Integer' },
+	{ id: 'none', name: 'None' },
+	{ id: 'print_si', name: 'Print function (signed)' },
+	{ id: 'print_ui', name: 'Print function (unsigned)' }
 ]
 
 const registers = ['r0', 'r1', 'r2', 'r3'].map(name => ({ name, types }))
