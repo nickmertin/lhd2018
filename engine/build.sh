@@ -1,3 +1,3 @@
 #!/bin/bash
-arm-linux-gnueabihf-as invoke.s -o invoke.o
-arm-linux-gnueabihf-gcc -c main.c -o main.o
+arm-none-eabi-as invoke.s -o invoke.o
+arm-none-eabi-gcc -c main.c -o main.o

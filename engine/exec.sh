@@ -1,6 +1,6 @@
 #!/bin/bash
-AS=arm-linux-gnueabihf-as
-LD=arm-linux-gnueabihf-ld
+AS=arm-none-eabi-as
+CC=arm-none-eabi-gcc
 ROOT=/home/nmertin/lhd2018/engine
 
 ID=$RANDOM
@@ -45,6 +45,6 @@ echo "bx lr"
 if ! $AS setup.s -o setup.o; then
 	exit 1
 fi
-if ! $LD code.o setup.o $ROOT/main.o -o exe; then
+if ! $CC code.o setup.o $ROOT/main.o $ROOT/invoke.o -o exe; then
 	exit 1
 fi
