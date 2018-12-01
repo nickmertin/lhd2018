@@ -22,13 +22,11 @@ fi
 IFS=':' read -r type value <<< "$arg"
 case "$type" in
 	"int")
-	#if ! [[ $value =~ '^[0-9]+' ]]; then
 	case $value in
-	''|*-?[!0-9]*)
+		''|*-?[!0-9]*)
 		echo "Error: argument is not in integer format!" >&2
 		exit 1
-	#fi
-	;;
+		;;
 	esac
 	echo "ldr r0, =$value"
 	;;
