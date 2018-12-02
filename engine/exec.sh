@@ -73,5 +73,9 @@ if ! $CC code.o setup.o $ROOT/main.o $ROOT/invoke.o -o exe; then
 	exit 1
 fi
 echo
-./exe
-exit $?
+mkdir lib
+mount --bind /lib lib
+chroot --userspec=lhd2018:lhd2018 . /exe
+RESULT=$?
+umount lib
+exit $RESULT
