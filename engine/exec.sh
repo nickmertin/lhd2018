@@ -9,6 +9,8 @@ mkdir -p /tmp/lhd2018/$ID
 cd /tmp/lhd2018/$ID
 cat > code.s
 if ! $AS code.s -o code.o; then
+	cd ..
+	rm -rf $ID
 	exit 1
 fi
 if ! (
@@ -63,13 +65,9 @@ echo "push {r0}"
 done
 echo "bx lr"
 echo "$STR_EXTRA"
-) > setup.s; then
-	exit 1
-fi
-if ! $AS setup.s -o setup.o; then
-	exit 1
-fi
-if ! $CC code.o setup.o $ROOT/main.o $ROOT/invoke.o -o exe; then
+) > setup.s || ! $AS setup.s -o setup.o || ! $CC code.o setup.o $ROOT/main.o $ROOT/invoke.o -o exe; then
+	cd ..
+	rm -rf $ID
 	exit 1
 fi
 echo
@@ -78,4 +76,6 @@ mount --bind /lib lib
 chroot --userspec=lhd2018:lhd2018 . /exe
 RESULT=$?
 umount lib
+cd ..
+rm -rf $ID
 exit $RESULT
