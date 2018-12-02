@@ -1,0 +1,13 @@
+[Unit]
+Description=Web server for MLH Local Hack Day 2018 Project
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=NODE_PATH DIR/web-interface/index.js
+Restart=on-failure
+RestartSec=1s
+WorkingDirectory=DIR/web-interface
+
+[Install]
+WantedBy=multi-user.target

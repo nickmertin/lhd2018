@@ -1,7 +1,7 @@
 #!/bin/bash
 AS=as
 CC=gcc
-ROOT=/root/lhd2018/engine
+ROOT=DIR/engine
 
 ID=$RANDOM
 
