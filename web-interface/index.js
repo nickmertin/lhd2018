@@ -10,6 +10,7 @@ const types = [
 	{ id: 'print_si', name: 'Print function (signed)' },
 	{ id: 'print_ui', name: 'Print function (unsigned)' },
 	{ id: 'print_c', name: 'Print function (character)' },
+	{ id: 'print_s', name: 'Print function (C string)' },
 	{ id: 'none', name: 'None' }
 ]
 

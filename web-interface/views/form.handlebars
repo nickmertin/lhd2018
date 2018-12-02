@@ -21,8 +21,9 @@
 </tr>
 {{/each}}
 </table>
+<p>Enter valid ARM assembly code below. The server will attempt to execute the function <code>test</code> with the arguments specified above.</p>
 <textarea name="code" rows="15" cols="50">{{code}}</textarea>
-<button>Run</button>
+<p><button>Run</button></p>
 {{#if result}}
 <p>Result code: {{result}}</p>
 {{/if}}

@@ -48,6 +48,9 @@ case "$type" in
 	"print_c")
 	echo "ldr r0, [r1, #8]"
 	;;
+	"print_s")
+	echo "ldr r0, [r1, #12]"
+	;;
 	"none")
 	echo "mov r0, #0"
 	;;
