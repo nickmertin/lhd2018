@@ -73,9 +73,12 @@ fi
 echo
 mkdir lib
 mount --bind /lib lib
-chroot --userspec=lhd2018:lhd2018 . /exe
+mkdir proc
+mount --bind /proc proc
+unshare -fp --mount-proc chroot . /exe $(id -u lhd2018)
 RESULT=$?
 umount lib
+umount proc
 cd ..
 rm -rf $ID
 exit $RESULT
